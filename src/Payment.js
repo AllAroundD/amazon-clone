@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "./reducer";
-import axios from './axios';
+import axios from './axios';    // local file axios
 import { db } from "./firebase";
 
 function Payment() {
@@ -23,7 +23,7 @@ function Payment() {
     const [clientSecret, setClientSecret] = useState(true);
 
     useEffect(() => {
-        // generate the special stripe secret which allows us to charge a customer
+        // generate the special stripe secret which allows us to charge a customer when the basket changes
         const getClientSecret = async () => {
             const response = await axios({
                 method: 'post',
@@ -36,8 +36,8 @@ function Payment() {
         getClientSecret();
     }, [basket])
 
-    // console.log('THE SECRET IS >>>', clientSecret)
-    // console.log('👱', user)
+    console.log('THE SECRET IS >>>', clientSecret)
+    console.log('👱', user)
 
     const handleSubmit = async (event) => {
         // do all the fancy stripe stuff...
@@ -141,6 +141,7 @@ function Payment() {
                                     thousandSeparator={true}
                                     prefix={"$"}
                                 />
+                                {/*  */}
                                 <button disabled={processing || disabled || succeeded}>
                                     <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                                 </button>
