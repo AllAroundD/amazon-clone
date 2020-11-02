@@ -1,10 +1,12 @@
 import React from 'react'
 import "./Product.css"
 import { useStateValue } from "./StateProvider";
+import { useAlert } from "react-alert";
 
 function Product({ id, title, image, price, rating }) {
     // eslint-disable-next-line
     const [{ basket }, dispatch] = useStateValue();
+    const alert = useAlert();
 
     // console.log("this is the basket >>> ", basket);
 
@@ -20,6 +22,7 @@ function Product({ id, title, image, price, rating }) {
                 rating: rating,
             },
         });
+        alert.success("Product added to basket");
     };
 
     return (
