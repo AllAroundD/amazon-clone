@@ -16,14 +16,15 @@
   display: flex;
 }
 
-.product > img {
+.product>img {
   max-height: 200px;
   width: 100%;
   object-fit: contain;
   margin-bottom: 15px;
+  border-radius: 5px;
 }
 
-.product > button {
+.product>button {
   background: #f0c14b;
   border: 1px solid;
   margin-top: 10px;
@@ -38,4 +39,12 @@
 .product__info {
   height: 100px;
   margin-bottom: 15px;
+}
+
+.product:hover {
+  background-color: #ecc96f;
+}
+
+.product>button:hover {
+  transform: scale(1.2);
 }
