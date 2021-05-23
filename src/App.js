@@ -1,21 +1,20 @@
 import React, { useEffect } from "react";
-import "./App.css";
-import Header from "./Header";
-import Home from "./Home";
+import Header from "./components/Header";
+import Home from "./components/Home";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Checkout from "./Checkout";
-import Login from "./Login";
-import Payment from "./Payment";
-import Orders from "./Orders";
+import Checkout from "./components/Checkout";
+import Login from "./components/Login";
+import Payment from "./components/Payment";
+import Orders from "./components/Orders";
 import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import { loadStripe } from "@stripe/stripe-js";
-
 import { Elements } from "@stripe/react-stripe-js";
+// import firebase from "firebase";
 
-const promise = loadStripe(
-  "pk_test_51HPvWVI6jSqpe99bAHmEPlsmwgbGUUkKxeW0SFeBvKd74QDgn9qQt4wr2ZkibkY3U0NMTdAkmr3UQpn52eIdoJcz00rLuFfhuP"
-)
+import "./App.css";
+
+const stripePromise = loadStripe(process.env.REACT_APP_my.stripe.key);
 
 function App() {
   // eslint-disable-next-line
@@ -25,7 +24,7 @@ function App() {
     // will only run once when the app component loads...
 
     auth.onAuthStateChanged((authUser) => {
-      console.log("THE USER IS >>> ", authUser);
+      // console.log("THE USER IS >>> ", authUser);
 
       if (authUser) {
         // the user just logged in / the user was logged in
@@ -62,7 +61,7 @@ function App() {
           </Route>
           <Route path="/payment">
             <Header />
-            <Elements stripe={promise}>
+            <Elements stripe={stripePromise}>
               <Payment />
             </Elements>
           </Route>
